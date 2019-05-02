@@ -4,14 +4,12 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 git pull origin master;
 
-function doIt() {	
-	rsync --exclude ".git/" \
+function doIt() { rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
-		--exclude "zsh_custom" \
+		--exclude "/zsh_custom" \
 		--exclude "bootstrap.sh" \
 		--exclude "README.md" \
-
 		--exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
 	source ~/.zprofile;
