@@ -110,9 +110,11 @@ brew install ssh-copy-id
 brew install tree
 brew install vbindiff
 brew install zopfli
+brew install tmux # tmux is a terminal multiplexe
 
-# Install work recommended
+# Install useful web dev binaries
 brew install mosh
+brew install jq # a command line JSON processor
 
 # Remove outdated versions from the cellar.
 brew cleanup
