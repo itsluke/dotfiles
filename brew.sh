@@ -22,25 +22,36 @@ brew install moreutils
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
-# Install Bash 4.
-brew install bash
-brew install bash-completion2
+# Install zsh
+brew install zsh
 
 # Switch to using brew-installed bash as default shell
-if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
-  chsh -s "${BREW_PREFIX}/bin/bash";
+if ! fgrep -q "${BREW_PREFIX}/bin/zsh" /etc/shells; then
+	echo "${BREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells;
+	chsh -s "${BREW_PREFIX}/bin/zsh";
 fi;
 
 # Install `wget`
 brew install wget
 
 # Install GnuPG to enable PGP-signing commits.
-brew install gnupg
-# hack to make gpg2 work
-brew install pinentry-mac
-brew link --overwrite gnupg
-echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+# https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+brew install gpg2 gnupg pinentry-mac
+GNUPG_DIR="$HOME/.gnupg"
+AGENT_FILE="$GNUPG_DIR/gpg-agent.conf"
+CONF_FILE="$GNUPG_DIR/gpg.conf"
+
+if ! test -f "$AGENT_FILE"; then
+	touch $AGENT_FILE
+fi
+echo "pinentry-program /usr/local/bin/pinentry-mac"  >> $AGENT_FILE
+
+if ! test -f "$CONF_FILE"; then
+	touch $CONF_FILE
+fi
+echo "# Uncomment within config (or add this line)
+# This tells gpg to use the gpg-agent
+use-agent" >> $CONF_FILE
 
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
@@ -100,5 +111,13 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 
+# Install work recommended
+brew install mosh
+
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# make zsh the default shell for homebrew
+dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+
+gpg --full-gen-key
