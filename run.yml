@@ -16,10 +16,6 @@
       tags:
         - tmux
 
-    - role: nvim
-      tags:
-        - nvim
-
     - role: karabiner
       tags:
         - karabiner
@@ -31,3 +27,7 @@
     - role: neofetch
       tags:
         - neofetch
+
+    - role: zsh
+      tags:
+        - zsh
