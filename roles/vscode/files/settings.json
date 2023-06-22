@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Solarized Light+",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "redhat.telemetry.enabled": true,
+    "editor.fontFamily": "'Dank Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14
+}

@@ -1,0 +1,26 @@
+---
+system:
+  packages:
+    brew:
+      - figlet
+      - yarn
+      - wget
+      - git
+      - nodejs
+      - fish
+      - neofetch
+      - tmux
+    cask:
+      # development
+      - vagrant
+      # - visual-studio-code
+      - kitty
+      - karabiner-elements
+      - 1password-cli
+      ## utilities
+      # - 1password
+      # - nextcloud
+      # - alfred
+      ## communication
+      # - telegram
+      # - whatsapp
