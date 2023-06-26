@@ -19,9 +19,9 @@
     owner: "{{ ansible_env.USER }}"
     mode: "0755"
 
-
-- name: Link the tmux configuration
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/tmux.conf"
+- name: Copy the tmux configuration
+  ansible.builtin.copy:
+    src: "files/tmux.conf"
     dest: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf"
-    state: link
+    owner: "{{ ansible_env.USER }}"
+    mode: "0755"

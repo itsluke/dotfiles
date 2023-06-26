@@ -1,6 +1,2 @@
 ---
-system:
-  packages:
-    mas:
-    brew:
-    cask:
+home_dir: Documents

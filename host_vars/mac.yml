@@ -1,26 +1,35 @@
 ---
-system:
-  packages:
-    brew:
-      - figlet
-      - yarn
-      - wget
-      - git
-      - nodejs
-      - fish
-      - neofetch
-      - tmux
-    cask:
+
+#
+# geerlingguy.mac vars
+#
+homebrew_installed_packages:
+  - yarn
+  - wget
+  - git
+  - gpg
+  - tmux
+  - figlet
+  - nodejs
+  - fish
+  - neofetch
+
+homebrew_cask_apps:
       # development
       - vagrant
       # - visual-studio-code
       - kitty
       - karabiner-elements
       - 1password-cli
-      ## utilities
-      # - 1password
-      # - nextcloud
-      # - alfred
-      ## communication
-      # - telegram
+      # utilities
+      - 1password
+      - nextcloud
+      - alfred
+      # communication
+      - telegram
       # - whatsapp
+
+# allows exisitng apps to fail quietly
+homebrew_cask_accept_external_apps: true
+
+

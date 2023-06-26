@@ -1,37 +1,10 @@
 ---
 
-- name: Check if homebrew is installed
-  register: system_brew_installed
-  changed_when: system_brew_installed.rc > 0 # rc. is part of the command reply 0 is successful
-  ansible.builtin.command:
-    cmd: brew --version
-
-- name: Install homebrew
-  become: true
-  when: system_brew_installed.rc > 0
-  changed_when: true
-  ansible.builtin.shell:
-    cmd: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-
-- name: Update homebrew & install brew packages
-  become: true
-  become_user: "{{ brew_user }}"
-  community.general.homebrew:
-    update_homebrew: true
-    name: "{{ system.packages.brew }}"
-    state: present
-
-- name: Install brew casks
-  become: true
-  become_user: "{{ brew_user }}"
-  community.general.homebrew_cask:
-    name: "{{ system.packages.cask }}"
-    state: present
-
 - name: Create personal directories
   loop:
     - ".config"
     - "{{ home_dir }}/development"
+    - "{{ home_dir }}/development/refs"
     - "{{ home_dir }}/personal"
     - "{{ home_dir }}/admin"
     - "{{ home_dir }}/media"

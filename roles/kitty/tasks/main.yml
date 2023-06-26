@@ -7,7 +7,8 @@
     mode: "0755"
 
 - name: Link the kity configuration file in place
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: "{{ role_path }}/files/kitty.conf"
     dest: "{{ ansible_env.HOME }}/.config/kitty/kitty.conf"
-    state: link
+    owner: "{{ ansible_env.USER }}"
+    mode: "0755"
