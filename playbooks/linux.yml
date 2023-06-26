@@ -1,0 +1,24 @@
+---
+- name: Install applications and configure dotfiles
+  hosts: linux
+  become: no
+  roles:
+    - role: system
+      tags:
+        - system
+
+    - role: geerlingguy.ntp
+      tags:
+          - system
+
+    - role: geerlingguy.epel
+      tags:
+          - system
+
+    - role: geerlingguy.security
+      tags:
+          - security
+
+    - role: geerlingguy.docker
+      tags:
+          - docker
