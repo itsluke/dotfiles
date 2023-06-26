@@ -1,0 +1,21 @@
+---
+- name: Install applications and configure dotfiles
+  hosts: raspberrypis
+  become: no
+  roles:
+    - role: system
+      tags:
+        - system
+
+    - role: geerlingguy.security
+      tags:
+          - security
+
+    - role: geerlingguy.pip
+      tags:
+          - python
+
+    - role: geerlingguy.raspberry-pi
+      tags:
+          - system
+
