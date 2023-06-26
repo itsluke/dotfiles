@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook -c dotfiles/ansible.cfg
 ---
 - name: Install applications and configure dotfiles
-  hosts: local
+  hosts: macs
   become: no
   roles:
     - role: system

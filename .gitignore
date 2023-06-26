@@ -1,4 +1,15 @@
 .DS_Store
 .fact_cache/
-group_vars/secrets.yml
+
+/files/fonts/*
+.DS_Store
+
+/inventory
+!/inventory/example
+
+/group_vars/
+/host_vars/
+!/host_vars/.gitkeep
+!/group_vars/all/vars.yml
+
 
