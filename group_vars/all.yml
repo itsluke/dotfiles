@@ -1,4 +1,2 @@
 ---
-brew_user: "itsluke"
 username: "{{ ansible_env.USER }}"
-home_dir: "~/NotDocuments"
