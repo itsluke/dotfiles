@@ -1,16 +1,20 @@
 #! /usr/bin/env ansible-playbook -c dotfiles/ansible.cfg
 ---
 - name: Install applications and configure dotfiles
-  hosts: all
+  hosts: local
   become: no
   roles:
     - role: system
       tags:
         - system
 
-    - role: fish
+    # - role: fish
+    #   tags:
+    #     - fish
+
+    - role: zsh
       tags:
-        - fish
+        - zsh
 
     - role: tmux
       tags:
@@ -28,6 +32,6 @@
       tags:
         - neofetch
 
-    - role: zsh
+    - role: vscode
       tags:
-        - zsh
+        - vscode

@@ -12,13 +12,15 @@
 
 - name: Deploy the karabiner asset files
   with_fileglob: "files/assets/complex_modifications/*.json"
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/karabiner/assets/complex_modifications/{{ item | basename }}"
-    state: link
+    owner: "{{ ansible_env.USER }}"
+    mode: "0755"
 
-- name: Deploy the karabiner asset files
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/karabiner.json"
+- name: Copy the karabiner asset files
+  ansible.builtin.copy:
+    src: "files/karabiner.json"
     dest: "{{ ansible_env.HOME }}/.config/karabiner/karabiner.json"
-    state: link
+    owner: "{{ ansible_env.USER }}"
+    mode: "0755"

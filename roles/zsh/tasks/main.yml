@@ -1,25 +1,31 @@
 ---
-- name: Create the directories
-  loop:
-    - ".config/zsh"
-    - ".config/zsh/functions"
-    - ".config/zsh/conf.d"
+- name: Create the zsh directory
   ansible.builtin.file:
     state: directory
-    path: "{{ ansible_env.HOME }}/{{ item }}"
+    path: "{{ ansible_env.HOME }}/.config/zsh"
     owner: "{{ username }}"
     mode: 0755
 
-- name: Deploy the zsh files
+- name: Template zsh files
   with_fileglob: "files/*.zsh"
-  ansible.builtin.file:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/zsh/{{ item | basename }}"
-    state: link
+    owner: "{{ username }}"
+    mode: 0755
 
-- name: Add configs to .zshrc
+- name: Copy the zsh files
+  with_fileglob: "files/*.zsh"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/zsh/{{ item | basename }}"
+    owner: "{{ username }}"
+    mode: 0755
+
+- name: Add config folder to .zshrc
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
     line: "ZSH_CUSTOM={{ ansible_env.HOME }}/.config/zsh/"
     state: present
     backup: yes
+

@@ -7,10 +7,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias p="cd ~/projects"
+alias _d="cd {{ $home_dir }}/"
+alias _dd="cd {{ $home_dir }}/development"
+alias _dp="cd {{ $home_dir }}/personal"
+alias _dm="cd {{ $home_dir }}/media"
+alias _da="cd {{ $home_dir }}/admin"
 alias g="git"
 
 # Detect which `ls` flavor is in use

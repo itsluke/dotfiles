@@ -169,3 +169,13 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# clones a repository to references folder with git
+function grab() {
+	if [ $# -eq 0 ]; then
+		echo "Please provide a repository"
+	else
+		git clone "$@" $dev_refs;
+	fi;
+
+}
