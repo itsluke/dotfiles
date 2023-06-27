@@ -44,6 +44,15 @@ Then edit the `inventory` file in this repository and change the line that start
 If you need to supply an SSH password (if you don't use SSH keys), make sure to pass the `--ask-pass` parameter to the `ansible-playbook` command.
 
 
+### Testing the playbook 
+
+An ubuntu container is availible for testing with the following command
+
+ ```
+ VAGRANT_VAGRANTFILE=testing/Vagrantfile vagrant up
+ ```
+
+
 ## Running the playbook 
 
  ```

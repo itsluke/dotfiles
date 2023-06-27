@@ -4,13 +4,16 @@
 /files/fonts/*
 .DS_Store
 
-/inventory
-!/inventory/example
+/inventory/*
+!/inventory/example.ini
 
-/group_vars/
-/host_vars/
-!/host_vars/.gitkeep
+inventory.ini
+
+/group_vars/*
 !/group_vars/all/vars.yml
 
+/host_vars/*
+!/host_vars/.gitkeep
+
 .ansible
-testing/.vagrant
+.vagrant
