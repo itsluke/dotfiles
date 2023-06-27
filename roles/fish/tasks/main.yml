@@ -10,7 +10,7 @@
     owner: "{{ username }}"
     mode: 0755
 
-- name: Deploy the fish configuration files
+- name: Copy the fish configuration files
   with_fileglob: "files/*.fish"
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -18,7 +18,7 @@
     owner: "{{ username }}"
     mode: 0755
 
-- name: Deploy the fish configuration templates
+- name: Template the fish configuration templates
   with_fileglob: "templates/*.fish"
   ansible.builtin.template:
     src: "{{ item }}"
@@ -26,9 +26,9 @@
     owner: "{{ username }}"
     mode: 0755
 
-- name: Deploy the fish functions
+- name: Copy the fish functions
   with_fileglob: "files/functions/*.fish"
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ config_dir }}/fish/functions/{{ item | basename }}"
     state: link

@@ -1,16 +1,4 @@
 ---
-# - name: Create group directories
-#   loop: "{{ config_dir | zip( directories | flatten ) }}"
-#   ansible.builtin.file:
-#     state: directory
-#     path: "{{ ansible_env.HOME }}/{{ config_dir }}"
-#     owner: "{{ username }}"
-#     mode: 0755
-
-- name: Create personal directories
-  loop: "{{ directories }}"
-  ansible.builtin.file:
-    state: directory
-    path: "{{ ansible_env.HOME }}/{{ item }}"
-    owner: "{{ username }}"
-    mode: 0755
+- import_tasks: essential.yml
+- import_tasks: maintenance.yml
+- import_tasks: user.yml

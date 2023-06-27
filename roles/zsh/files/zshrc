@@ -1,0 +1,46 @@
+ZSH_CUSTOM=/Users/itsluke/.config/zsh/
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# Themes that are nice; "frontcube" "gozilla" "nanotsech" "obraun"
+ZSH_THEME="sorin"
+
+# Enable nice fuzzy tab completion
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+
+# Visualize and selecting with arrow keys in completion.
+zstyle ':completion:*' menu select
+
+# Ignore case in tab complete.
+# Refresh tab completion from PATH automatically, so hash(1) does not need to be called after installing a new program.
+zstyle ':completion:*' rehash true
+
+# Complete options for aliases too.
+setopt completealiases
+
+# Ignore case in tab complete.
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+autoload -Uz compinit
+compinit
+
+# Enable colors
+autoload -U colors && colors
+
+# Command history
+export HISTSIZE=1000000                        # How many lines in the current session to remember.
+export SAVEHIST=1000000                        # How many lines to save to disk. Must be <=HISTSIZE.
+setopt appendhistory                               # Append to history write on exit, don't overwrite.
+bindkey "^R" history-beginning-search-backward # Complete from history with prefix
+bindkey "^E" history-beginning-search-forward  # Complete from history with prefix
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# Add python to PATH
+export PATH=$PATH:$HOME/Library/Python/3.11/bin

@@ -4,7 +4,7 @@
     path: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
     state: directory
     recurse: yes
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ username }}"
 
 - name: Clone the tpm repository
   ansible.builtin.git:
@@ -16,12 +16,12 @@
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/{{ config_dir }}/tmux"
     state: directory
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ username }}"
     mode: "0755"
 
 - name: Copy the tmux configuration
   ansible.builtin.copy:
     src: "files/tmux.conf"
     dest: "{{ ansible_env.HOME }}/{{ config_dir }}/tmux/tmux.conf"
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ username }}"
     mode: "0755"
