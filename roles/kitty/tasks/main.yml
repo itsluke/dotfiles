@@ -1,7 +1,7 @@
 ---
 - name: Make sure that the kitty config folder is created
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/kitty"
+    path: "{{ ansible_env.HOME }}/{{ config_dir }}/kitty"
     state: directory
     owner: "{{ username }}"
     mode: "0755"
@@ -9,6 +9,6 @@
 - name: Link the kity configuration file in place
   ansible.builtin.copy:
     src: "{{ role_path }}/files/kitty.conf"
-    dest: "{{ ansible_env.HOME }}/.config/kitty/kitty.conf"
+    dest: "{{ ansible_env.HOME }}/{{ config_dir }}/kitty/kitty.conf"
     owner: "{{ ansible_env.USER }}"
     mode: "0755"

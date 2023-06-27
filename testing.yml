@@ -1,0 +1,5 @@
+---
+- name: Print loop output
+  hosts: linux
+  roles:
+    - role: testing

@@ -7,6 +7,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Shortcuts
+export REFERENCE_FOLDER = "{{ $home_dir }}/development/refs"
+
 alias _d="cd {{ $home_dir }}/"
 alias _dd="cd {{ $home_dir }}/development"
 alias _dp="cd {{ $home_dir }}/personal"

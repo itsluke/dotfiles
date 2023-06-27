@@ -1,13 +1,14 @@
 ---
+# - name: Create group directories
+#   loop: "{{ config_dir | zip( directories | flatten ) }}"
+#   ansible.builtin.file:
+#     state: directory
+#     path: "{{ ansible_env.HOME }}/{{ config_dir }}"
+#     owner: "{{ username }}"
+#     mode: 0755
 
 - name: Create personal directories
-  loop:
-    - ".config"
-    - "{{ home_dir }}/development"
-    - "{{ home_dir }}/development/refs"
-    - "{{ home_dir }}/personal"
-    - "{{ home_dir }}/admin"
-    - "{{ home_dir }}/media"
+  loop: "{{ directories }}"
   ansible.builtin.file:
     state: directory
     path: "{{ ansible_env.HOME }}/{{ item }}"

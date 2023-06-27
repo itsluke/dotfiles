@@ -1,2 +1,4 @@
 ---
 username: "{{ ansible_env.USER }}"
+admin_name: "gardener"
+config_dir: ".config"

@@ -175,7 +175,6 @@ function grab() {
 	if [ $# -eq 0 ]; then
 		echo "Please provide a repository"
 	else
-		git clone "$@" $dev_refs;
+		git clone "$@" $REFERENCE_FOLDER;
 	fi;
-
 }
