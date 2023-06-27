@@ -1,0 +1,8 @@
+---
+- name: Print loop output
+  ansible.builtin.debug:
+    msg: "{{ item.key }} - {{ item.value }}"
+  loop: 
+    - "{{ username }}"
+    - "{{ group_user_groups }}"
+

@@ -1,5 +1,12 @@
 ---
 roles:
+    # mac specific roles
     - name: geerlingguy.mac.homebrew
     - name: geerlingguy.mac.mas
     - name: geerlingguy.mac.doc
+
+    # linux specific roles
+    - name: geerlingguy.security
+    - name: geerlingguy.docker
+    - name: geerlingguy.ntp
+    - name: geerlingguy.pip

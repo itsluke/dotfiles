@@ -5,7 +5,7 @@
     - karabiner/assets
     - karabiner/assets/complex_modifications
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    path: "{{ ansible_env.HOME }}/{{ config_dir }}/{{ item }}"
     state: directory
     owner: "{{ username }}"
     mode: "0755"
@@ -14,13 +14,13 @@
   with_fileglob: "files/assets/complex_modifications/*.json"
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.config/karabiner/assets/complex_modifications/{{ item | basename }}"
+    dest: "{{ ansible_env.HOME }}/{{ config_dir }}/karabiner/assets/complex_modifications/{{ item | basename }}"
     owner: "{{ ansible_env.USER }}"
     mode: "0755"
 
 - name: Copy the karabiner asset files
   ansible.builtin.copy:
     src: "files/karabiner.json"
-    dest: "{{ ansible_env.HOME }}/.config/karabiner/karabiner.json"
+    dest: "{{ ansible_env.HOME }}/{{ config_dir }}/karabiner/karabiner.json"
     owner: "{{ ansible_env.USER }}"
     mode: "0755"

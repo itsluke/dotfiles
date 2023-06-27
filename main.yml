@@ -1,2 +1,3 @@
 ---
-- include_tasks: tasks/macs.yml
+- include_tasks: playbooks/macs.yml
+- include_tasks: playbooks/linux.yml

@@ -2,8 +2,8 @@
 
 - name: Make sure that the vscode config folders are created
   loop:
-    - "{{ ansible_env.HOME }}/.config/code"
-    - "{{ ansible_env.HOME }}/.config/code/snippets"
+    - "{{ ansible_env.HOME }}/{{ config_dir }}/code"
+    - "{{ ansible_env.HOME }}/{{ config_dir }}/code/snippets"
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
@@ -13,14 +13,14 @@
 - name: Copy config files
   ansible.builtin.copy:
     src: "files/settings.json"
-    dest: "{{ ansible_env.HOME }}/.config/code/settings.json"
+    dest: "{{ ansible_env.HOME }}/{{ config_dir }}/code/settings.json"
     owner: "{{ username }}"
     mode: 0755
 
-- name: Link .config folders to vscode settings
+- name: Link {{ config_dir }} folders to vscode settings
   loop:
-    - "{{ ansible_env.HOME }}/.config/code/settings.json"
-    - "{{ ansible_env.HOME }}/.config/code/snippets" 
+    - "{{ ansible_env.HOME }}/{{ config_dir }}/code/settings.json"
+    - "{{ ansible_env.HOME }}/{{ config_dir }}/code/snippets" 
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings"
