@@ -12,4 +12,5 @@
 !/host_vars/.gitkeep
 !/group_vars/all/vars.yml
 
-
+.ansible
+testing/.vagrant

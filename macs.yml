@@ -2,6 +2,7 @@
 ---
 - name: Install applications and configure dotfiles
   hosts: macs
+  gather_facts: yes
   become: no
   roles:
     - role: system
@@ -11,6 +12,22 @@
     # - role: fish
     #   tags:
     #     - fish
+
+    # - role: geerlingguy.mac.mas
+    #   tags:
+    #     - mac-app-store
+
+    # - role: geerlingguy.mac.dock
+    #   tags:
+    #     - dock
+
+    - role: geerlingguy.mac.homebrew
+      tags:
+        - homebrew
+
+    - role: gantsign.oh-my-zsh
+      tags:
+        - zsh
 
     - role: zsh
       tags:

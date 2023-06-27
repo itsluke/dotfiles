@@ -4,21 +4,25 @@
   become: no
   roles:
     - role: system
+      become: yes
       tags:
         - system
 
     - role: geerlingguy.ntp
+      become: yes
       tags:
           - system
 
-    - role: geerlingguy.epel
-      tags:
-          - system
+    # - role: geerlingguy.epel
+    #   tags:
+    #       - system
 
     - role: geerlingguy.security
+      become: yes
       tags:
           - security
 
     - role: geerlingguy.docker
+      become: yes
       tags:
           - docker

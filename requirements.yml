@@ -1,12 +1,14 @@
 ---
 roles:
     # mac specific roles
-    - name: geerlingguy.mac.homebrew
-    - name: geerlingguy.mac.mas
-    - name: geerlingguy.mac.doc
+    - name: gantsign.oh-my-zsh
 
     # linux specific roles
     - name: geerlingguy.security
     - name: geerlingguy.docker
     - name: geerlingguy.ntp
     - name: geerlingguy.pip
+
+collections:
+    # mac specific collections
+  - name: geerlingguy.mac

@@ -6,9 +6,9 @@
     owner: "{{ username }}"
     mode: "0755"
 
-- name: Link the kity configuration file in place
+- name: Copy the kity configuration file in place
   ansible.builtin.copy:
     src: "{{ role_path }}/files/kitty.conf"
     dest: "{{ ansible_env.HOME }}/{{ config_dir }}/kitty/kitty.conf"
-    owner: "{{ ansible_env.USER }}"
+    owner: "{{ username }}"
     mode: "0755"
