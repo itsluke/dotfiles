@@ -7,7 +7,8 @@
 /inventory/*
 !/inventory/example.ini
 
-inventory.ini
+/hosts/*
+!/hosts/example.ini
 
 /group_vars/*
 !/group_vars/all/vars.yml
@@ -17,3 +18,8 @@ inventory.ini
 
 .ansible
 .vagrant
+
+testing/keycontainer
+testing/keycontainer.pub
+
+roles/testing

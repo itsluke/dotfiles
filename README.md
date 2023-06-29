@@ -55,7 +55,9 @@ An ubuntu container is availible for testing with the following command
 
 ## Running the playbook 
 
+Run the playbook on a control node 
+
  ```
- ansible-playbook -i inventory run.yml
+ ansible-playbook -i hosts/inventory.ini main.yml -K
  ```
 

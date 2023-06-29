@@ -8,6 +8,7 @@ roles:
     - name: geerlingguy.docker
     - name: geerlingguy.ntp
     - name: geerlingguy.pip
+    - name: geerlingguy.repo-epel
 
 collections:
     # mac specific collections

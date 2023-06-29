@@ -1,0 +1,10 @@
+network:
+  version: 2
+  ethernets:
+   "{{ (networks | selectattr('name', '==', 'lan') | map(attribute='interface') | first) | default('') }}":
+      dhcp4: true
+  vlans:
+    app:
+      id: 4
+      link: "{{ (networks | selectattr('name', '==', 'lan') | map(attribute='interface') | first) | default('') }}"
+      addresses: [ "{{ (networks | selectattr('name', '==', 'app') | map(attribute='base') | first) | default('') }}.228/24" ]

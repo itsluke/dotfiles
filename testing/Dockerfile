@@ -1,29 +1,30 @@
-FROM ubuntu
+FROM ubuntu:jammy
+LABEL author="hello@luke.ng"
 
-# Taken from https://dev.to/mattdark/using-docker-as-provider-for-vagrant-10me
-
-ENV TZ=Europe/Berlin
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN apt-get update -y
-
-RUN apt-get install -y --no-install-recommends ssh sudo python3-dnf
-
-RUN useradd --create-home -s /bin/bash vagrant
-RUN echo -n 'vagrant:vagrant' | chpasswd
-RUN echo 'vagrant ALL = NOPASSWD: ALL' > /etc/sudoers.d/vagrant
-RUN chmod 440 /etc/sudoers.d/vagrant
-RUN mkdir -p /home/vagrant/.ssh
-RUN chmod 700 /home/vagrant/.ssh
-RUN echo "ssh-rsa MIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQIBIwKCAQEA4iqWPJXtzZA68mKdELs4jJsdyky+ewdZeNds5tjcnHU5zUYE25K+ffJED9qUWICcLZDc81TGWjHyAqD1Bw7XpgUwFgeUJwUlzQurAv+/ySnxiwuaGJfhFM1CaQHzfXphgVml+fZUvnJUTvzfTK2Lg6EdbUE9TarUlBf/xPfuEhMSlIE5keb/Zz3/LUlRg8yDqz5w+QWVJ4utnKnKiqwZN0mwpwU7YSyJhlT4YV1F3n4YjLswM5wJs2oqm0jssQu/BT0tyEXNDYBLEF4AsClaWuSJ2kjq7KhrrYXzagqhnSei9ODYFShJu8UWVec3Ihb5ZXlzO6vdNQ1J9Xsf4m+2ywKBgQD6qFxx/Rv9CNN96l/4rb14HKirC2o/orApiHmHDsURs5rUKDx0f9iPcXN7S1uePXuJRK/5hsubaOCx3Owd2u9gD6Oq0CsMkE4CUSiJcYrMANtx54cGH7RkEjFZxK8xAv1ldELEyxrFqkbE4BKd8QOt414qjvTGyAK+OLD3M2QdCQKBgQDtx8pNCAxR7yhHbIWT1AH66+XWN8bXq7l3RO/ukeaci98JfkbkxURZhtxV/HHuvUhnPLdX3TwygPBYZFNo4pzVEhzWoTtnEtrFueKxyc3+LjZpuo+mBlQ6ORtfgkr9gBVphXZGYEzkCD3lVdl8L4cw9BVpKrJCs1c5taGjDgdInQKBgHm/fVvv96bJxc9x1tffXAcj3OVdUN0UgXNCSaf/3A/phbeBQe9xS+3mpc4r6qvx+iy69mNBeNZ0xOitIjpjBo2+dBEjSBwLk5q5tJqHmy/jKMJL4n9ROlx93XS+njxgibTvU6Fp9w+NOFD/HvxB3Tcz6+jJF85D5BNAG3DBMKBjAoGBAOAxZvgsKN+JuENXsST7F89Tck2iTcQIT8g5rwWCP9Vt74yboe2kDT531w8+egz7nAmRBKNM751U/95P9t88EDacDI/Z2OwnuFQHCPDFllYOUI+SpLJ6/vURRbHSnnn8a/XG+nzedGH5JGqEJNQsz+xT2axM0/W/CRknmGaJkda/AoGANWrLCz708y7VYgAtW2Uf1DPOIYMdvo6fxIB5i9ZfISgcJ/bbCUkFrhoH+vq/5CIWxCPp0f85R4qxxQ5ihxJ0YDQT9Jpx4TMss4PSavPaBH3RXow5Ohe+bYoQNE5OgEXk2wVfZczCZpigBKbKZHNYcelXtTt/nP3rsCuGcM4h53s=" > /home/vagrant/.ssh/authorized_keys
-RUN chmod 600 /home/vagrant/.ssh/authorized_keys
-RUN chown -R vagrant:vagrant /home/vagrant/.ssh
-RUN sed -i -e 's/Defaults.*requiretty/#&/' /etc/sudoers
-RUN sed -i -e 's/\(UsePAM \)yes/\1 no/' /etc/ssh/sshd_config
-
-RUN mkdir /var/run/sshd
-
-RUN apt-get -y install openssh-client
-
+ARG USERNAME=intern
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+EXPOSE 86
+
+# Apt update & apt install required packages
+RUN apt update && apt -y install openssh-server sudo net-tools less
+
+# Add a non-root user
+RUN useradd -ms /bin/bash $USERNAME
+
+# Remove no-needed packages
+# RUN apt -y autoremove && apt -y autoclean && apt -y clean
+
+# Create the ssh directory and authorized_keys file
+USER $USERNAME
+RUN mkdir /home/$USERNAME/.ssh
+COPY keycontainer.pub /home/$USERNAME/.ssh/authorized_keys
+
+USER root
+RUN chown $USERNAME /home/$USERNAME/.ssh/authorized_keys && \
+chmod 600 /home/$USERNAME/.ssh/authorized_keys
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL " >> /etc/sudoers
+
+# Run ssh service
+RUN service ssh start
+
+CMD ["/usr/sbin/sshd","-D"]

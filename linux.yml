@@ -1,6 +1,17 @@
 ---
 - name: Install applications and configure dotfiles
   hosts: linux
+  vars_prompt:
+    - name: username
+      prompt: Enter linux username
+      private: false
+    - name: password
+      prompt: Enter linux host password
+  pre_tasks:
+      - import_tasks: tasks/ssh_juggle_port.yml
+        tags:
+            - always
+            - port
   become: no
   roles:
     - role: system
@@ -13,9 +24,10 @@
       tags:
           - system
 
-    # - role: geerlingguy.epel
-    #   tags:
-    #       - system
+    - role: geerlingguy.repo-epel
+      when: ansible_facts['os_family']|lower == 'RedHat'
+      tags:
+          - system
 
     - role: geerlingguy.security
       become: yes

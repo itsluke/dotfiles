@@ -1,4 +1,19 @@
 ---
-- import_tasks: essential.yml
-- import_tasks: maintenance.yml
-- import_tasks: user.yml
+- name: Setup linux system
+  when: ansible_facts['os_family']|lower == 'debian'
+  block:  
+    - import_tasks: setup.yml
+    - import_tasks: maintenance.yml
+    - import_tasks: user.yml
+
+- name: Setup mac system
+  when: ansible_facts['os_family']|lower == 'darwin'
+  block:
+    - name: Create personal directories
+      loop: "{{ directories }}"
+      ansible.builtin.file:
+        state: directory
+        path: "{{ ansible_env.HOME }}/{{ item }}"
+        owner: "{{ username }}"
+        mode: 0755
+
