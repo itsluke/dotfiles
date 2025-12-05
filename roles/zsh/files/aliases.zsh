@@ -7,13 +7,14 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Shortcuts
-export REFERENCE_FOLDER = "{{ $home_dir }}/development/refs"
+export MAIN="$HOME/Documents"
+export REFERENCE_FOLDER="$MAIN/development/refs"
 
-alias _d="cd {{ $home_dir }}/"
-alias _dd="cd {{ $home_dir }}/development"
-alias _dp="cd {{ $home_dir }}/personal"
-alias _dm="cd {{ $home_dir }}/media"
-alias _da="cd {{ $home_dir }}/admin"
+alias _d="cd $MAIN/"
+alias _dd="cd $MAIN/development"
+alias _dp="cd $MAIN/personal"
+alias _dm="cd $MAIN/media"
+alias _da="cd $MAIN/admin"
 alias g="git"
 
 # Detect which `ls` flavor is in use

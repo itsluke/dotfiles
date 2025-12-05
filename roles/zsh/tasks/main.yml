@@ -6,13 +6,13 @@
     owner: "{{ username }}"
     mode: 0755
 
-- name: Template zsh files
-  with_fileglob: "files/*.zsh"
-  ansible.builtin.template:
-    src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/{{ config_dir }}/zsh/{{ item | basename }}"
-    owner: "{{ username }}"
-    mode: 0755
+# - name: Template zsh files
+#   with_fileglob: "templates/*.zsh"
+#   ansible.builtin.template:
+#     src: "{{ item }}"
+#     dest: "{{ ansible_env.HOME }}/{{ config_dir }}/zsh/{{ item | basename }}"
+#     owner: "{{ username }}"
+#     mode: 0755
 
 - name: Copy the .zshrc
   ansible.builtin.copy:

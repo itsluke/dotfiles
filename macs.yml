@@ -25,9 +25,9 @@
       tags:
         - homebrew
 
-    - role: gantsign.oh-my-zsh
-      tags:
-        - zsh
+    # - role: gantsign.oh-my-zsh
+    #   tags:
+    #     - zsh
 
     - role: zsh
       tags:
